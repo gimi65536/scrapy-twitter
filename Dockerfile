@@ -9,4 +9,4 @@ RUN playwright install $browser
 
 COPY . .
 
-CMD ["python3", "-u", "app.py"]
+CMD ["python3", "-u", "grab.py"]

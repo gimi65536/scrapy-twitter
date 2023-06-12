@@ -1,0 +1,5 @@
+services:
+  twitter-scraper:
+    container_name: tweet_notify
+    build: .
+    restart: always
