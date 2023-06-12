@@ -14,12 +14,16 @@ from pathlib import Path
 with open(config('GRAB_INFO')) as f:
     data = safe_load(f)
 
-history_path = Path('history.json')
+history_path = Path('history/history.json')
 history = [set() for _ in data['instance']]
 if(history_path.exists()):
 	with open(history_path) as f:
-		j = load(f)
-		history = [set(l) for l in j]
+		try:
+			j = load(f)
+		except:
+			pass
+		else:
+			history = [set(l) for l in j]
 
 process = CrawlerProcess(
     settings={
