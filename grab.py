@@ -11,6 +11,8 @@ from pipeline import TweetPipeline
 from json import load, dump
 from pathlib import Path
 
+from multiprocessing import Process
+
 with open(config('GRAB_INFO')) as f:
     data = safe_load(f)
 
@@ -41,9 +43,7 @@ process = CrawlerProcess(
     }
 )
 
-# Main
-while True:
-	print(datetime.now().strftime('%Y%m%d %H:%M'))
+def run():
 	for index, i in enumerate(data['instance']):
 		process.crawl(TweetSpider, instance = i, history = history[index])
 
@@ -52,4 +52,11 @@ while True:
 	# All processes are done
 	with open(history_path, 'w') as f:
 		dump([list(s) for s in history], f)
+
+# Main
+while True:
+	print(datetime.now().strftime('%Y%m%d %H:%M'))
+	_process = Process(target = run)
+	_process.start()
+	_process.join()
 	sleep(data['period'])
