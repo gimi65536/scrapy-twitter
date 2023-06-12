@@ -43,7 +43,7 @@ while True:
 	sleep(data['period'])
 	print(datetime.now().strftime('%Y%m%d %H:%M'))
 	for index, i in enumerate(data['instance']):
-		process.crawl(TweetSpider, instance = i, history = history[i])
+		process.crawl(TweetSpider, instance = i, history = history[index])
 
 	process.start(stop_after_crawl = False)
 	# All processes are done
