@@ -35,17 +35,21 @@ process = CrawlerProcess(
 		"ITEM_PIPELINES": {
 			TweetPipeline: 100,
 		},
+		"LOG_LEVEL": "ERROR",
+		"PLAYWRIGHT_BROWSER_TYPE": "firefox",
+		"USER_AGENT": None,
     }
 )
 
 # Main
 while True:
-	sleep(data['period'])
 	print(datetime.now().strftime('%Y%m%d %H:%M'))
 	for index, i in enumerate(data['instance']):
 		process.crawl(TweetSpider, instance = i, history = history[index])
 
-	process.start(stop_after_crawl = False)
+	process.start()
+	print("Done")
 	# All processes are done
 	with open(history_path, 'w') as f:
-		dump(history, f)
+		dump([list(s) for s in history], f)
+	sleep(data['period'])

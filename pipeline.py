@@ -6,9 +6,9 @@ class TweetPipeline:
 		if item['href'] in spider.history:
 			raise DropItem("Existing")
 
-		spider.add(item['href'])
-		for webhook in spider.instance.webhook:
-			method = webhook.method
+		spider.history.add(item['href'])
+		for webhook in spider.instance['webhook']:
+			method = webhook['method'].strip().lower()
 			if method not in ('post', 'put', 'patch'):
 				method = 'post'
 			r = requests.request(method, webhook['address'],
