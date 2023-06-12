@@ -1,4 +1,4 @@
-FROM python:3.11.1-alpine
+FROM mcr.microsoft.com/playwright/python:v1.34.0-jammy
 
 ARG browser=firefox
 ENV GRAB_INFO=tweet.yml
