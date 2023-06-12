@@ -19,4 +19,5 @@ class TweetSpider(scrapy.Spider):
 				"username": self.instance['username'],
 				"link": f"https://twitter.com{href}",
 				"created_at": created_at,
+				"href": href, # This field is used as an identifier (like "id of the tweet")
 			}
