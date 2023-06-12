@@ -1,9 +1,9 @@
+from scrapy.exceptions import DropItem
+
 class TweetPipeline:
 	def process_item(self, item, spider):
-		NotImplemented
+		if item['href'] in spider.history:
+			raise DropItem("Existing")
 
-	def open_spider(self, spider):
-		NotImplemented
-
-	def close_spider(self, spider):
+		spider.add(item['href'])
 		NotImplemented
