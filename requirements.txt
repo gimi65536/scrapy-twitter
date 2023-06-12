@@ -1,0 +1,4 @@
+requests
+pyyaml
+python-decouple
+scrapy-playwright

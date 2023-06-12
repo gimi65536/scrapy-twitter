@@ -1,0 +1,18 @@
+period: 60 # In seconds
+webhook:
+  base: &base
+    address: foo
+    method: POST
+    headers: null
+    data: null
+  example-hook: &ex
+    <<: *base
+    address: "https://discord.com/api/webhooks/123456/abcdef"
+    method: POST
+    data:
+      content: "{link}" # text, username, link, created_at supported
+instance:
+  - username: twitter_username
+    userid: 114514
+    webhook:
+      - *ex
