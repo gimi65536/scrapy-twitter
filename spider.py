@@ -10,7 +10,7 @@ class TweetSpider(scrapy.Spider):
 		yield scrapy.Request(f"https://twitter.com/{self.instance['username']}", meta = {"playwright": True})
 
 	def parse(self, response):
-		for article in response.xpath('//article'):
+		for article in reversed(response.xpath('//article')):
 			href = article.xpath('.//a[time]/@href').get()
 			created_at = datetime.fromisoformat(article.xpath('.//time/@datetime').get())
 			text = ''.join(article.xpath('.//div[@data-testid="tweetText"]//text()').getall())
