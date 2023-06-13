@@ -6,6 +6,7 @@ class TweetPipeline:
 		if item['href'] in spider.history:
 			raise DropItem("Existing")
 
+		print(f"\t{item['href']}")
 		spider.history.add(item['href'])
 		for webhook in spider.instance['webhook']:
 			method = webhook['method'].strip().lower()

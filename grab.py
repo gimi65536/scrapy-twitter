@@ -20,6 +20,7 @@ history_path = Path('history/history.json')
 history = [set() for _ in data['instance']]
 
 def read_history():
+	global history
 	if(history_path.exists()):
 		with open(history_path) as f:
 			try:
@@ -47,7 +48,7 @@ process = CrawlerProcess(
     }
 )
 
-def run():
+def run(history):
 	for index, i in enumerate(data['instance']):
 		process.crawl(TweetSpider, instance = i, history = history[index])
 
@@ -60,7 +61,7 @@ def run():
 # Main
 while True:
 	print(datetime.now().strftime('%Y%m%d %H:%M'))
-	_process = Process(target = run) # history will changed in the process but not here
+	_process = Process(target = run, args = (history, )) # history will changed in the process but not here
 	_process.start()
 	_process.join()
 	read_history() # Update the variable changed in the process
