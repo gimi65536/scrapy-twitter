@@ -18,14 +18,18 @@ with open(config('GRAB_INFO')) as f:
 
 history_path = Path('history/history.json')
 history = [set() for _ in data['instance']]
-if(history_path.exists()):
-	with open(history_path) as f:
-		try:
-			j = load(f)
-		except:
-			pass
-		else:
-			history = [set(l) for l in j]
+
+def read_history():
+	if(history_path.exists()):
+		with open(history_path) as f:
+			try:
+				j = load(f)
+			except:
+				pass
+			else:
+				history = [set(l) for l in j]
+
+read_history()
 
 process = CrawlerProcess(
     settings={
@@ -56,7 +60,8 @@ def run():
 # Main
 while True:
 	print(datetime.now().strftime('%Y%m%d %H:%M'))
-	_process = Process(target = run)
+	_process = Process(target = run) # history will changed in the process but not here
 	_process.start()
 	_process.join()
+	read_history() # Update the variable changed in the process
 	sleep(data['period'])
