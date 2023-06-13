@@ -3,5 +3,7 @@ services:
     container_name: tweet_notify
     build: .
     restart: always
+    environment:
+      - PICKLE=1
     volumes:
       - ./history:/etc/scrapy/history
