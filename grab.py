@@ -86,5 +86,6 @@ while True:
 	_process = Process(target = run, args = (history, )) # history will changed in the process but not here
 	_process.start()
 	_process.join()
+	_process.close()
 	history = load_history() # Update the variable changed in the process
 	sleep(data['period'])
