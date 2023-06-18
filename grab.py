@@ -66,7 +66,7 @@ process = CrawlerProcess(
 			TweetPipeline: 100,
 		},
 		"LOG_LEVEL": "ERROR",
-		"PLAYWRIGHT_BROWSER_TYPE": "firefox",
+		"PLAYWRIGHT_BROWSER_TYPE": config('BROWSER'),
 		"USER_AGENT": None,
     }
 )
