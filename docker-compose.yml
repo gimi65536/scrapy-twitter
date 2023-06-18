@@ -1,7 +1,10 @@
 services:
   twitter-scraper:
     container_name: tweet_notify
-    build: .
+    build:
+      context: .
+      args:
+        - BROWSER=chromium
     restart: always
     environment:
       - PICKLE=1

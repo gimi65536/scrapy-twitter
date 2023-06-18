@@ -1,7 +1,8 @@
 FROM python:3.11.4-bullseye
 
 ENV GRAB_INFO=tweet.yml
-ENV BROWSER=firefox
+ARG BROWSER=firefox
+ENV BROWSER=$BROWSER
 WORKDIR /etc/scrapy
 
 COPY requirements.txt .
