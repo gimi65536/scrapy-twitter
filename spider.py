@@ -10,7 +10,6 @@ class TweetSpider(scrapy.Spider):
 		# GET request
 		yield scrapy.Request(f"https://twitter.com/{self.instance['username']}", meta = {
 			"playwright": True,
-			"playwright_include_page": True,
 			"playwright_page_methods": [
 				PageMethod("wait_for_timeout", 20000)
 			]
