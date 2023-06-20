@@ -76,6 +76,7 @@ def run(history):
 		process.crawl(TweetSpider, instance = i, history = history[index])
 
 	process.start()
+	process.join()
 	print("Done")
 	# All processes are done
 	dump_history(history)
@@ -86,6 +87,5 @@ while True:
 	_process = Process(target = run, args = (history, )) # history will changed in the process but not here
 	_process.start()
 	_process.join()
-	_process.close()
 	history = load_history() # Update the variable changed in the process
 	sleep(data['period'])
