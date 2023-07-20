@@ -100,5 +100,5 @@ while True:
 				)
 				print(r.status_code)
 
-	dump_history()
+	dump_history(history)
 	sleep(data['period'])

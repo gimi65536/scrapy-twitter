@@ -7,4 +7,4 @@ services:
     environment:
       - PICKLE=1
     volumes:
-      - ./history:/etc/scrapy/history
+      - ./history:/etc/tweet/history

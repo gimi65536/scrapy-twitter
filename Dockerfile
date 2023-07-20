@@ -1,6 +1,7 @@
 FROM python:3.11.4-bullseye
 
 ENV GRAB_INFO=tweet.yml
+WORKDIR /etc/tweet
 
 COPY requirements.txt .
 RUN pip install --no-cache -r requirements.txt
