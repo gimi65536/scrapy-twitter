@@ -3,9 +3,6 @@ services:
     container_name: tweet_notify
     build:
       context: .
-      args:
-        - BROWSER=chromium
-    init: true
     restart: always
     environment:
       - PICKLE=1
