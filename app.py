@@ -14,6 +14,7 @@ with open(config('GRAB_INFO')) as f:
     data = safe_load(f)
 
 use_pickle = config('PICKLE', cast = bool, default = False)
+bridge = config('BRIDGE', default = 'https://rss-bridge.org/bridge01/')
 
 def load_history():
 	if use_pickle:
@@ -56,7 +57,7 @@ while True:
 	print(datetime.now().strftime('%Y%m%d %H:%M'))
 	for index, i in enumerate(data['instance']):
 		print(f"Instance {index}")
-		response = requests.get('https://rss-bridge.org/bridge01/', params = {
+		response = requests.get(bridge, params = {
 			'action': 'display',
 			'bridge': 'TwitterBridge',
 			'context': 'By username',
@@ -71,14 +72,17 @@ while True:
 		result = response.json()
 
 		if 'items' not in result:
-			print('Error when retrieving response...')
+			print('\tError when retrieving response...')
 			continue
+
+		print(f"\tReteieved {len(result['items'])} tweets")
 
 		for tweet in reversed(result['items']):
 			if tweet['id'] in history[index]:
 				continue
 
 			history[index].add(tweet['id'])
+			print('\t', tweet['id'])
 
 			# Retrieve text
 			selector = Selector(tweet['content_html'])
@@ -98,7 +102,7 @@ while True:
 					headers = webhook.get('headers'),
 					data = {k: v.format(**send_data) for k, v in webhook['data'].items()}
 				)
-				print(r.status_code)
+				print('\t\t', r.status_code)
 
 	dump_history(history)
 	sleep(data['period'])

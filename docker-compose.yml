@@ -6,5 +6,6 @@ services:
     restart: always
     environment:
       - PICKLE=1
+      - BRIDGE=https://bridge.easter.fr/
     volumes:
       - ./history:/etc/tweet/history
